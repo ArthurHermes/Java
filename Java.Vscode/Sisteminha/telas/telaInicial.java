@@ -1,41 +1,134 @@
 package telas;
 
+import conexao.ConexaoBancoDados;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class telaInicial extends JFrame {
+    ConexaoBancoDados conexao = new ConexaoBancoDados();
+
+
     public telaInicial() {
         setTitle("Biblioteca");
         setSize(700, 500);
         setLocationRelativeTo(null);
+        getContentPane().setBackground(Color.GRAY);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        JPanel login = new JPanel(new GridLayout(3, 1, 1, 1)); // GridLayout com 3 linhas e 1 coluna, espaçamento vertical de 5 pixels
+        /* Setando o GridBagLayout para centralizar verticalmente e horizontalmente */
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.anchor = GridBagConstraints.CENTER;
 
-        JPanel panelUsuario = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 5)); // Painel para centralizar o campo de usuário com espaçamento de 5 pixels
-        JLabel usuario = new JLabel("Usuário:");
-        JTextField campoUsuario = new JTextField(15);
-        panelUsuario.add(usuario);
-        panelUsuario.add(campoUsuario);
+        /* Criando painel de login e setando a cor de fundo para cinza */
+        JPanel painelLogin = new JPanel(new GridLayout(3, 1, 10, 10));
+        painelLogin.setBackground(Color.GRAY);
 
-        JPanel panelSenha = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0)); // Painel para centralizar o campo de senha com espaçamento de 5 pixels
-        JLabel senha = new JLabel("Senha:");
-        JPasswordField campoSenha = new JPasswordField(15);
-        panelSenha.add(senha);
-        panelSenha.add(campoSenha);
+        /* Criando painel de Usuario e setando a cor de fundo para cinza */
+        JPanel painelUsuario = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        painelUsuario.setBackground(Color.GRAY);
 
-        JPanel panelBotao = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0)); // Painel para centralizar o botão de login com espaçamento de 5 pixels
-        JButton botaoLogin = new JButton("Login");
-        panelBotao.add(botaoLogin);
 
-        login.add(panelUsuario);
-        login.add(panelSenha);
-        login.add(panelBotao);
+        /* Criando painel de Senha e setando a cor de fundo para cinza */
+        JPanel painelSenha = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        painelSenha.setBackground(Color.GRAY);
 
-        add(login);
+
+        /* Criando painel de Logar e setando a cor de fundo para cinza */
+        JPanel painelLogar = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        painelLogar.setBackground(Color.GRAY);
+
+
+        /////////////////////////////////////////////////////////////////////////
+        // Campo de usuario
+
+        /* Criando o JLabel de usuario */
+        JLabel user = new JLabel("Usuario: ");
+
+        /* Setando a cor do texto para branco */
+        user.setForeground(Color.WHITE); 
+
+        /* Criando o campo de usuario */
+        JTextField userField = new JTextField();
+
+        /* Setando o tamanho de preferencia do campo de usuario */
+        userField.setPreferredSize(new Dimension(200, 30));
+
+        /* Adicionando os campos de usuario no JPanel de usuario */
+        painelUsuario.add(user);
+        painelUsuario.add(userField);
+
+        /////////////////////////////////////////////////////////////////////////
+        // Campo senha
+
+        /* Criando o JLabel de senha */
+        JLabel psswd = new JLabel("Senha: ");
+
+        /* Setando a cor da letra para branco */
+        psswd.setForeground(Color.WHITE);
+
+        /* Criando o campo de senha */
+        JPasswordField psswdField = new JPasswordField();
+
+        /* Setando o tamanho de preferencia para o campo de senha */
+        psswdField.setPreferredSize(new Dimension(200, 30));
+        
+        /* Adicionando os campos de senha no Jpanel de senha */
+        painelSenha.add(psswd);
+        painelSenha.add(psswdField);
+
+        //////////////////////////////////////////////////////////////////////////
+
+        // Botao de logar
+
+        /* Criando o botão para logar */
+        JButton logar = new JButton("Logar");
+
+        /* Adicionando o botao ao JLabel de logar */
+        painelLogar.add(logar);
+
+        //////////////////////////////////////////////////////////////////////////
+
+
+        /* Adicionando os paineis de usuario, senha e o botao de logar no painel de login */
+        painelLogin.add(painelUsuario);
+        painelLogin.add(painelSenha);
+        painelLogin.add(painelLogar);
+
+        /* Adicionando o painel na tela principal */
+        add(painelLogin, gbc);
         setVisible(true);
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////
+        // Adicionando ação aos botões
+
+
+        logar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                String usuario = userField.getText();
+                String senha = new String(psswdField.getPassword());
+
+                conexao.consultarUsuario(usuario, senha, userField, psswdField, telaInicial.this);
+
+
+            }
+        });
+
+
+
+
+
+
+
     }
 
     public static void main(String[] args) {

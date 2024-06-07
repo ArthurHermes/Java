@@ -3,10 +3,10 @@ public class livro {
     private String nome;
     private Float valor;
     private int numPag;
+    private String idioma;
+    private boolean disponibilidade;
+
     private categoria categoria;
-    private classificacao classificacao;
-
-
     private enum categoria{
         romance,
         ficcaoCientifica,
@@ -19,15 +19,12 @@ public class livro {
         programacao,
         gastronomia
     }
-
+    
+    private classificacao classificacao;
     private enum classificacao{
         infantil,
         livre
     }
-
-    private String idioma;
-
-    private boolean disponibilidade;
 
 
     /* Constructor */
