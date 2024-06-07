@@ -19,7 +19,7 @@ public class ConexaoBancoDados {
             Connection connection = DriverManager.getConnection(url, user, password);
             System.out.println("Conexão bem-sucedida!");
 
-            String sql = "SELECT * FROM Usuario";
+            String sql = "SELECT * FROM usuario";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             ResultSet resultSet = statement.executeQuery();
@@ -29,14 +29,17 @@ public class ConexaoBancoDados {
                 String nome = resultSet.getString("nome");
                 String senha = resultSet.getString("senha");
                 String endereco = resultSet.getString("endereco");
-                int tipoUsuario = resultSet.getInt("tpUsuario");
+                String tipoUsuario = resultSet.getString("tpUsuario");
 
                 System.out.println(
+                        "----------------------\n" +
                         "id: " + idUsuario + 
                         "\nNome: " + nome +
                         "\nSenha: " + senha + 
                         "\nendereco" + endereco +
-                        "\nTipo Usuario: " + tipoUsuario);
+                        "\nTipo Usuario: " + tipoUsuario +
+                        "\n" +
+                        "----------------------");
             }
 
             connection.close();
