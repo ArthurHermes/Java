@@ -56,7 +56,7 @@ public class telaInicial extends JFrame {
 
         /* Criando o campo de usuario */
         JTextField userField = new JTextField();
-
+        
         /* Setando o tamanho de preferencia do campo de usuario */
         userField.setPreferredSize(new Dimension(200, 30));
 
@@ -117,7 +117,9 @@ public class telaInicial extends JFrame {
                 String usuario = userField.getText();
                 String senha = new String(psswdField.getPassword());
 
-                conexao.consultarUsuario(usuario, senha, userField, psswdField, telaInicial.this);
+                if(conexao.consultarUsuario(usuario, senha, telaInicial.this)){
+                    
+                }
 
 
             }

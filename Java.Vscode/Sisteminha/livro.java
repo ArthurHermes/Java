@@ -4,7 +4,7 @@ public class livro {
     private Float valor;
     private int numPag;
     private String idioma;
-    private boolean disponibilidade;
+    private String disponibilidade;
 
     private categoria categoria;
     private enum categoria{
