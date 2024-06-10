@@ -34,7 +34,7 @@ public class cadastroLivro {
                 JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso");
                         return isRegistered = true;
             } else {
-                JOptionPane.showMessageDialog(null, "Erro ao cadastrar novo livro!")
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar novo livro!");
                 return isRegistered;
             }
 
