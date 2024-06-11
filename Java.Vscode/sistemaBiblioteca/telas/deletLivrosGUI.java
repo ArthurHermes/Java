@@ -3,7 +3,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import CRUDE.livro.visualizarLivro;
+
 import java.awt.Color;
+import java.util.List;
 
 public class DeletLivrosGUI extends JFrame {
 
@@ -15,16 +18,29 @@ public class DeletLivrosGUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         JPanel painel = new JPanel();
+        painel.setBackground(Color.GRAY);
 
         JLabel livrosLabel = new JLabel("Livros Cadastrados: ");
         livrosLabel.setForeground(Color.WHITE);
-        String[] livros = 
-        JComboBox Livros = new JComboBox<>();
+
+        List<String> livros = visualizarLivro.visualizar();
 
 
+        String[] livrosArray = new String[livros.size()];
+        livros.toArray(livrosArray);
 
+ 
+        JComboBox<String> comboBoxLivros = new JComboBox<>(livrosArray);
 
+        painel.add(livrosLabel);
+        painel.add(comboBoxLivros);
 
+        add(painel);
 
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new DeletLivrosGUI();
     }
 }
