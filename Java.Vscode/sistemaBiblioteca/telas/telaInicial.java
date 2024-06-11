@@ -1,14 +1,15 @@
 package telas;
 
-import conexao.ConexaoBancoDados;
 
+import conexao.ConexaoBancoDados;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 public class telaInicial extends JFrame {
-    ConexaoBancoDados conexao = new ConexaoBancoDados();
+    
+    Connection conexao = ConexaoBancoDados.getConnection();
 
 
     public telaInicial() {
@@ -112,17 +113,13 @@ public class telaInicial extends JFrame {
         // Adicionando ação aos botões
 
 
-        logar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
-                String usuario = userField.getText();
-                String senha = new String(psswdField.getPassword());
+        logar.addActionListener((ActionEvent e) -> {
+            String usuario = userField.getText();
+            String senha = new String(psswdField.getPassword());
 
-                if(conexao.consultarUsuario(usuario, senha, telaInicial.this)){
-                    
-                }
-
-
-            }
+            login loginInstance = new login();
+            // Chamar o método consultarUsuario da instância criada
+            loginInstance.consultarUsuario(usuario, senha, this);
         });
 
 

@@ -1,17 +1,15 @@
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JFrame;
+
 import javax.swing.JOptionPane;
 
 import conexao.ConexaoBancoDados;
-import telas.cadastroLivrosGUI;
 
 public class login{
 
-    public void consultarUsuario(String usuario, String senha, JFrame telaInicial) {
+    public void consultarUsuario(String usuario, String senha) {
         try {
             Connection connection = ConexaoBancoDados.getConnection();
 
@@ -24,14 +22,12 @@ public class login{
             
             if (resultSet.next()){
                 JOptionPane.showMessageDialog(null, "Bem Vindo! " + resultSet.getString("nome"));
-                if (resultSet.getString("tpUsuario").equals("gerente")) {
-                    telaInicial.dispose();
-                    new cadastroLivrosGUI();
+                if ("gerente".equals(resultSet.getString("tpUsuario"))) {
+                    
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
             }
-
 
             connection.close();
         } catch (SQLException e) {

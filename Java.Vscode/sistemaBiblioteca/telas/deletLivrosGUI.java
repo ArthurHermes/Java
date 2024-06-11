@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import CRUDE.livro.visualizarLivro;
+import CRUD.livro.visualizarLivro;
 
 import java.awt.Color;
 import java.util.List;

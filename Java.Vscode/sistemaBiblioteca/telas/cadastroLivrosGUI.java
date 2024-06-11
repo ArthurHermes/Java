@@ -1,16 +1,25 @@
 package telas;
 
-import conexao.*;
-import javax.swing.*;
-
-import CRUDE.livro.cadastroLivro;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import CRUD.cadastroLivro;
 
 public class cadastroLivrosGUI extends JFrame {
-    ConexaoBancoDados conexao = new ConexaoBancoDados();
+
 
     public cadastroLivrosGUI() {
         setTitle("Cadastro de Livros");
@@ -143,45 +152,24 @@ public class cadastroLivrosGUI extends JFrame {
 
         setVisible(true);
 
-        cadButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String nome = nomeLivroField.getText();
-                float valor = Float.parseFloat(valorLivroField.getText());
-                int numPag = Integer.parseInt(numPaginaLivroField.getText());
-                String idioma = idiomaField.getText();
-                String disponibilidade = (String) comboBoxDisponibilidade.getSelectedItem();
-                String categoria = (String) comboBoxgeneros.getSelectedItem();
-                String classificacao = (String) comboBoxclassificacao.getSelectedItem();
-
-                cadastroLivro cadastro = new cadastroLivro();
-                if (cadastro.cadastrarLivro(nome, valor, numPag, idioma, disponibilidade, categoria, classificacao)) {
-                    limparCampo(nomeLivroField, valorLivroField, numPaginaLivroField, idiomaField, comboBoxDisponibilidade, comboBoxclassificacao, comboBoxgeneros);
-                } else {
-                    limparCampo(nomeLivroField, valorLivroField, numPaginaLivroField, idiomaField, comboBoxDisponibilidade, comboBoxclassificacao, comboBoxgeneros);
-                }
-            }
+        cadButton.addActionListener((ActionEvent e) -> {
+            String nome = nomeLivroField.getText();
+            float valor = Float.parseFloat(valorLivroField.getText());
+            int numPag = Integer.parseInt(numPaginaLivroField.getText());
+            String idioma1 = idiomaField.getText();
+            String disponibilidade1 = (String) comboBoxDisponibilidade.getSelectedItem();
+            String categoria = (String) comboBoxgeneros.getSelectedItem();
+            String classificacao = (String) comboBoxclassificacao.getSelectedItem();
+            new cadastroLivro().cadastrarLivro(nome, valor, numPag, categoria, classificacao, idioma1, disponibilidade1);
         });
 
 
-        voltarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new telaInicial();
-            }
+        voltarButton.addActionListener((ActionEvent e) -> {
+            dispose();
+            new telaInicial();
         });
     }
     
-
-    public void limparCampo(JTextField nomeLivroField, JTextField valorLivroField, JTextField numPaginaLivroField, JTextField idiomaField, JComboBox<String> comboBoxDisponibilidade, JComboBox<String> comboBoxclassificacao, JComboBox<String> comboBoxgeneros){
-        JOptionPane.showMessageDialog(null, "Erro ao cadastrar o livro");
-        nomeLivroField.setText("");
-        valorLivroField.setText("");
-        numPaginaLivroField.setText("");
-        idiomaField.setText("");
-        comboBoxDisponibilidade.setSelectedIndex(0);
-        comboBoxgeneros.setSelectedIndex(0);
-        comboBoxclassificacao.setSelectedIndex(0);
-    }
 
 
     public static void main(String args[]) {

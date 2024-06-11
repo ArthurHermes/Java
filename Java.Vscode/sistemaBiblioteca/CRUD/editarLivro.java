@@ -1,4 +1,4 @@
-package CRUDE.livro;
+package CRUD.livro;
 
 public class editarLivro {
     
